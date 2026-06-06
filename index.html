@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
 
 <head>
@@ -55,7 +56,9 @@ margin-bottom:5px;
 
 margin:20px;
 
-font-size:20px;
+font-size:22px;
+
+font-weight:bold;
 
 }
 
@@ -121,10 +124,11 @@ color:white;
 
 <p>Smart Door Controller</p>
 
-<div class="status"
+<div
+class="status"
 id="status">
 
-Disconnected
+DISCONNECTED
 
 </div>
 
@@ -164,42 +168,121 @@ STOP
 
 <script>
 
+const SERVICE_UUID =
+"6E400001-B5A3-F393-E0A9-E50E24DCCA9E";
+
+const RX_UUID =
+"6E400002-B5A3-F393-E0A9-E50E24DCCA9E";
+
+const TX_UUID =
+"6E400003-B5A3-F393-E0A9-E50E24DCCA9E";
+
+
 let device;
 
-let characteristic;
+let server;
+
+let rx;
+
+let tx;
+
 
 async function connectBT(){
 
 try{
 
+document
+.getElementById(
+"status"
+).innerText =
+"SEARCHING...";
+
+
 device =
 await navigator.bluetooth.requestDevice({
 
-acceptAllDevices:true,
+filters:[{
+
+name:"KSE_NEXUS"
+
+}],
 
 optionalServices:[
-'00001101-0000-1000-8000-00805f9b34fb'
+
+SERVICE_UUID
+
 ]
 
 });
 
-document
-.getElementById(
-"status")
-.innerText=
-"Connecting...";
 
-const server=
+server =
 await device.gatt.connect();
 
+
+const service =
+await server
+.getPrimaryService(
+SERVICE_UUID
+);
+
+
+rx =
+await service
+.getCharacteristic(
+RX_UUID
+);
+
+
+tx =
+await service
+.getCharacteristic(
+TX_UUID
+);
+
+
+await tx
+.startNotifications();
+
+
+tx.addEventListener(
+
+'characteristicvaluechanged',
+
+event=>{
+
+const value =
+new TextDecoder()
+.decode(
+event.target.value
+);
+
 document
 .getElementById(
-"status")
-.innerText=
-"Connected";
+"status"
+).innerText =
+value;
+
+}
+
+);
+
+
+document
+.getElementById(
+"status"
+).innerText =
+"CONNECTED";
+
+
+console.log(
+"BLE CONNECTED"
+);
 
 }
 catch(e){
+
+console.log(e);
 
 alert(e);
 
@@ -207,34 +290,35 @@ alert(e);
 
 }
 
+
+
 async function sendCmd(cmd){
 
 try{
 
-if(!device){
+if(!rx){
 
 alert(
-"Connect first");
+"CONNECT FIRST"
+);
 
 return;
 
 }
 
-const encoder =
-new TextEncoder();
 
-const service =
-await device.gatt.getPrimaryService(
-'00001101-0000-1000-8000-00805f9b34fb'
+await rx
+.writeValueWithoutResponse(
+
+new TextEncoder()
+.encode(cmd)
+
 );
 
-characteristic =
-await service.getCharacteristic(
-'00002a00-0000-1000-8000-00805f9b34fb'
-);
 
-await characteristic.writeValue(
-encoder.encode(cmd)
+console.log(
+"TX:",
+cmd
 );
 
 }
@@ -245,6 +329,7 @@ console.log(e);
 }
 
 }
+
 
 </script>
 
