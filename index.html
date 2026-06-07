@@ -187,6 +187,7 @@ let rx;
 let tx;
 
 
+
 async function connectBT(){
 
 try{
@@ -194,18 +195,14 @@ try{
 document
 .getElementById(
 "status"
-).innerText =
+).innerText=
 "SEARCHING...";
 
 
 device =
 await navigator.bluetooth.requestDevice({
 
-filters:[{
-
-name:"KSE_NEXUS"
-
-}],
+acceptAllDevices:true,
 
 optionalServices:[
 
@@ -214,6 +211,23 @@ SERVICE_UUID
 ]
 
 });
+
+
+device.addEventListener(
+
+'gattserverdisconnected',
+
+()=>{
+
+document
+.getElementById(
+"status"
+).innerText=
+"DISCONNECTED";
+
+}
+
+);
 
 
 server =
@@ -251,7 +265,7 @@ tx.addEventListener(
 
 event=>{
 
-const value =
+const text=
 new TextDecoder()
 .decode(
 event.target.value
@@ -260,8 +274,8 @@ event.target.value
 document
 .getElementById(
 "status"
-).innerText =
-value;
+).innerText=
+text;
 
 }
 
@@ -271,7 +285,7 @@ value;
 document
 .getElementById(
 "status"
-).innerText =
+).innerText=
 "CONNECTED";
 
 
@@ -326,10 +340,11 @@ catch(e){
 
 console.log(e);
 
-}
+alert(e);
 
 }
 
+}
 
 </script>
 
