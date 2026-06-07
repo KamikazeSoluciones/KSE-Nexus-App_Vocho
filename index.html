@@ -134,20 +134,20 @@ border-radius:50%;
 background:#666;
 
 }
-
 .connected{
 
-background:#00ff88;
+background:#00aaff;
 
 box-shadow:
 
-0 0 18px #00ff88;
+0 0 22px #00aaff;
 
 animation:
 
 pulse 1s infinite;
 
 }
+
 
 @keyframes pulse{
 
@@ -173,7 +173,9 @@ transform:scale(1);
 
 .display{
 
-background:#050505;
+background:rgba(0,0,0,.35);
+
+backdrop-filter:blur(4px);
 
 border:
 
@@ -208,6 +210,7 @@ align-items:center;
 
 }
 
+
 .connectWrap{
 
 display:flex;
@@ -220,11 +223,11 @@ margin-bottom:20px;
 
 .connect{
 
-width:180px;
+width:160px;
 
-padding:14px;
+padding:12px;
 
-font-size:20px;
+font-size:18px;
 
 border:none;
 
@@ -232,16 +235,21 @@ border-radius:40px;
 
 background:
 
-linear-gradient(
-#1f5fff,
-#004cff);
+rgba(0,90,255,.20);
+
+backdrop-filter:blur(8px);
+
+border:
+
+1px solid rgba(
+0,170,255,.35);
 
 color:white;
 
 box-shadow:
 
-0 0 18px rgba(
-0,120,255,.4);
+0 0 15px rgba(
+0,170,255,.20);
 
 cursor:pointer;
 
@@ -277,35 +285,56 @@ transform:scale(.97);
 
 }
 
+.mainBtn:active{
+
+transform:scale(.97);
+
+filter:brightness(1.4);
+
+}
+
+
 .open{
 
 background:
 
-linear-gradient(
-#00a944,
-#00cf55);
+rgba(0,180,80,.22);
+
+backdrop-filter:blur(8px);
+
+border:
+
+1px solid rgba(
+0,255,120,.35);
 
 box-shadow:
 
-0 0 20px rgba(
-0,255,120,.35);
+0 0 15px rgba(
+0,255,120,.18);
 
 }
+
 
 .close{
 
 background:
 
-linear-gradient(
-#cc7a00,
-#ff9800);
+rgba(255,170,0,.22);
+
+backdrop-filter:blur(8px);
+
+border:
+
+1px solid rgba(
+255,180,0,.40);
 
 box-shadow:
 
-0 0 20px rgba(
-255,180,0,.35);
+0 0 15px rgba(
+255,180,0,.18);
 
 }
+
 
 .stopWrap{
 
@@ -337,33 +366,27 @@ cursor:pointer;
 
 background:
 
-radial-gradient(
+rgba(255,0,0,.28);
 
-circle,
-
-#ff6666,
-
-#dd0000 65%,
-
-#700000
-
-);
+backdrop-filter:blur(12px);
 
 border:
 
-8px solid #620000;
+8px solid rgba(
+255,80,80,.40);
 
 box-shadow:
 
-0 0 35px rgba(
-255,0,0,.8),
+0 0 30px rgba(
+255,0,0,.45),
 
 inset 0 10px 20px rgba(
-255,255,255,.25);
+255,255,255,.15);
 
 transition:.15s;
 
 }
+
 
 .stop:active{
 
