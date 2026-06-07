@@ -9,106 +9,371 @@
 <meta name="viewport"
 content="width=device-width,initial-scale=1">
 
-<title>KSE Nexus</title>
+<title>VOCHO Door Controller</title>
 
 <link rel="manifest"
 href="manifest.json">
 
 <style>
 
-body{
+*{
 
-background:#0f1115;
-
-font-family:Arial;
-
-color:white;
-
-text-align:center;
+box-sizing:border-box;
 
 margin:0;
 
+padding:0;
+
+}
+
+body{
+
+font-family:Arial;
+
+background:
+
+linear-gradient(
+rgba(0,0,0,.70),
+rgba(0,0,0,.88)
+),
+
+url("icon.png");
+
+background-size:cover;
+
+background-position:center;
+
+min-height:100vh;
+
+display:flex;
+
+justify-content:center;
+
 padding:20px;
 
-}
-
-.card{
-
-max-width:450px;
-
-margin:auto;
-
-padding:25px;
-
-background:#1b1f27;
-
-border-radius:20px;
+color:white;
 
 }
 
-h1{
-
-margin-bottom:5px;
-
-}
-
-.status{
-
-margin:20px;
-
-font-size:22px;
-
-font-weight:bold;
-
-}
-
-button{
+.panel{
 
 width:100%;
 
+max-width:480px;
+
+padding:25px;
+
+border-radius:28px;
+
+background:
+
+rgba(15,15,15,.82);
+
+backdrop-filter:blur(8px);
+
+border:
+
+1px solid rgba(
+255,180,0,.22);
+
+box-shadow:
+
+0 0 60px rgba(
+255,180,0,.15);
+
+}
+
+.logo{
+
+font-size:42px;
+
+font-weight:bold;
+
+text-align:center;
+
+color:#FFD34E;
+
+text-shadow:
+
+0 0 20px orange;
+
+}
+
+.subtitle{
+
+text-align:center;
+
+opacity:.8;
+
+margin-bottom:25px;
+
+}
+
+.btRow{
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+gap:10px;
+
+margin-bottom:20px;
+
+}
+
+.btIcon{
+
+width:15px;
+
+height:15px;
+
+border-radius:50%;
+
+background:#666;
+
+}
+
+.connected{
+
+background:#00ff88;
+
+box-shadow:
+
+0 0 18px #00ff88;
+
+animation:
+
+pulse 1s infinite;
+
+}
+
+@keyframes pulse{
+
+0%{
+
+transform:scale(1);
+
+}
+
+50%{
+
+transform:scale(1.35);
+
+}
+
+100%{
+
+transform:scale(1);
+
+}
+
+}
+
+.display{
+
+background:#050505;
+
+border:
+
+2px solid #00ffff;
+
+border-radius:16px;
+
 padding:22px;
 
-margin-top:15px;
+font-size:30px;
 
-font-size:22px;
+font-family:monospace;
 
-border:none;
+text-align:center;
 
-border-radius:14px;
+color:#00ffff;
 
-cursor:pointer;
+box-shadow:
+
+0 0 25px rgba(
+0,255,255,.3);
+
+margin-bottom:25px;
+
+min-height:90px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+}
+
+.connectWrap{
+
+display:flex;
+
+justify-content:center;
+
+margin-bottom:20px;
 
 }
 
 .connect{
 
-background:#3366ff;
+width:180px;
+
+padding:14px;
+
+font-size:20px;
+
+border:none;
+
+border-radius:40px;
+
+background:
+
+linear-gradient(
+#1f5fff,
+#004cff);
 
 color:white;
+
+box-shadow:
+
+0 0 18px rgba(
+0,120,255,.4);
+
+cursor:pointer;
+
+}
+
+.mainBtn{
+
+width:100%;
+
+padding:22px;
+
+margin-top:16px;
+
+font-size:26px;
+
+font-weight:bold;
+
+border:none;
+
+border-radius:18px;
+
+color:white;
+
+cursor:pointer;
+
+transition:.15s;
+
+}
+
+.mainBtn:active{
+
+transform:scale(.97);
 
 }
 
 .open{
 
-background:#00aa55;
+background:
 
-color:white;
+linear-gradient(
+#00a944,
+#00cf55);
+
+box-shadow:
+
+0 0 20px rgba(
+0,255,120,.35);
 
 }
 
 .close{
 
-background:#ff9900;
+background:
 
-color:black;
+linear-gradient(
+#cc7a00,
+#ff9800);
+
+box-shadow:
+
+0 0 20px rgba(
+255,180,0,.35);
+
+}
+
+.stopWrap{
+
+display:flex;
+
+justify-content:center;
+
+margin-top:28px;
 
 }
 
 .stop{
 
-background:#ff3333;
+width:130px;
+
+height:130px;
+
+border-radius:50%;
+
+border:none;
+
+font-size:28px;
+
+font-weight:bold;
 
 color:white;
+
+cursor:pointer;
+
+background:
+
+radial-gradient(
+
+circle,
+
+#ff6666,
+
+#dd0000 65%,
+
+#700000
+
+);
+
+border:
+
+8px solid #620000;
+
+box-shadow:
+
+0 0 35px rgba(
+255,0,0,.8),
+
+inset 0 10px 20px rgba(
+255,255,255,.25);
+
+transition:.15s;
+
+}
+
+.stop:active{
+
+transform:
+
+scale(.93);
+
+box-shadow:
+
+0 0 70px red;
 
 }
 
@@ -118,19 +383,45 @@ color:white;
 
 <body>
 
-<div class="card">
+<div class="panel">
 
-<h1>KSE NEXUS</h1>
+<div class="logo">
 
-<p>Smart Door Controller</p>
+VOCHO
+
+</div>
+
+<div class="subtitle">
+
+Door Controller
+
+</div>
+
+<div class="btRow">
 
 <div
-class="status"
-id="status">
+class="btIcon"
+id="btIcon">
+
+</div>
+
+<div id="btText">
 
 DISCONNECTED
 
 </div>
+
+</div>
+
+<div
+class="display"
+id="status">
+
+READY
+
+</div>
+
+<div class="connectWrap">
 
 <button
 class="connect"
@@ -140,8 +431,10 @@ CONNECT
 
 </button>
 
+</div>
+
 <button
-class="open"
+class="mainBtn open"
 onclick="sendCmd('A')">
 
 OPEN
@@ -149,12 +442,14 @@ OPEN
 </button>
 
 <button
-class="close"
+class="mainBtn close"
 onclick="sendCmd('C')">
 
 CLOSE
 
 </button>
+
+<div class="stopWrap">
 
 <button
 class="stop"
@@ -166,26 +461,20 @@ STOP
 
 </div>
 
+</div>
+
 <script>
 
-const SERVICE_UUID =
+const SERVICE_UUID=
 "6e400001-b5a3-f393-e0a9-e50e24dcca9e";
 
-const RX_UUID =
+const RX_UUID=
 "6e400002-b5a3-f393-e0a9-e50e24dcca9e";
 
-const TX_UUID =
+const TX_UUID=
 "6e400003-b5a3-f393-e0a9-e50e24dcca9e";
 
-
-let device;
-
-let server;
-
 let rx;
-
-let tx;
-
 
 
 async function connectBT(){
@@ -196,18 +485,18 @@ document
 .getElementById(
 "status"
 ).innerText=
-"SEARCHING...";
+"SEARCHING";
 
 
-device =
-await navigator.bluetooth.requestDevice({
+const device=
+
+await navigator.bluetooth
+.requestDevice({
 
 acceptAllDevices:true,
 
 optionalServices:[
-
 SERVICE_UUID
-
 ]
 
 });
@@ -221,43 +510,41 @@ device.addEventListener(
 
 document
 .getElementById(
-"status"
+"btText"
 ).innerText=
 "DISCONNECTED";
+
+document
+.getElementById(
+"btIcon"
+).classList.remove(
+"connected"
+);
 
 }
 
 );
 
 
-server =
+const server=
 await device.gatt.connect();
 
-
-const service =
-await server
-.getPrimaryService(
+const service=
+await server.getPrimaryService(
 SERVICE_UUID
 );
 
-
-rx =
-await service
-.getCharacteristic(
+rx=
+await service.getCharacteristic(
 RX_UUID
 );
 
-
-tx =
-await service
-.getCharacteristic(
+const tx=
+await service.getCharacteristic(
 TX_UUID
 );
 
-
-await tx
-.startNotifications();
-
+await tx.startNotifications();
 
 tx.addEventListener(
 
@@ -266,6 +553,7 @@ tx.addEventListener(
 event=>{
 
 const text=
+
 new TextDecoder()
 .decode(
 event.target.value
@@ -281,22 +569,21 @@ text;
 
 );
 
-
 document
 .getElementById(
-"status"
+"btText"
 ).innerText=
 "CONNECTED";
 
-
-console.log(
-"BLE CONNECTED"
+document
+.getElementById(
+"btIcon"
+).classList.add(
+"connected"
 );
 
 }
 catch(e){
-
-console.log(e);
 
 alert(e);
 
@@ -305,10 +592,7 @@ alert(e);
 }
 
 
-
 async function sendCmd(cmd){
-
-try{
 
 if(!rx){
 
@@ -320,29 +604,12 @@ return;
 
 }
 
-
-await rx
-.writeValueWithoutResponse(
+await rx.writeValue(
 
 new TextEncoder()
 .encode(cmd)
 
 );
-
-
-console.log(
-"TX:",
-cmd
-);
-
-}
-catch(e){
-
-console.log(e);
-
-alert(e);
-
-}
 
 }
 
